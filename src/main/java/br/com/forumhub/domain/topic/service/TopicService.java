@@ -43,4 +43,14 @@ public class TopicService {
         var ts = topicRepository.save(topicToSave);
         return new TopicData(ts.getId(), ts.getTitle(), ts.getMessage(), ts.getCreateDate(), ts.getStatus(), ts.getAuthor().getId(), ts.getCourse().getId());
     }
+
+    public TopicData findById(Long id) {
+
+        if (!topicRepository.existsById(id))
+            throw new NotFoundException("topic not found with id = " + id);
+
+        var topic = topicRepository.getReferenceById(id);
+        return new TopicData(topic);
+    }
+
 }

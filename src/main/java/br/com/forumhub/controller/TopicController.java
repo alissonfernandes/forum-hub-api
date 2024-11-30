@@ -34,4 +34,9 @@ public class TopicController {
         var page = topicRepository.findAll(pageable).map(TopicData::new);
         return ResponseEntity.ok(page);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity get(@PathVariable Long id) {
+        return ResponseEntity.ok(topicService.findById(id));
+    }
 }
