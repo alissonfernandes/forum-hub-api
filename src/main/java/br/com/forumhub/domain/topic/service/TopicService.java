@@ -63,7 +63,7 @@ public class TopicService {
             topicToUpdate.setAuthor(authorUpdate);
         }
 
-        if (updateTopic.course() != null){
+        if (updateTopic.course() != null) {
             verifyExistsCourse(updateTopic.course());
             var courseUpdate = courseRepository.getReferenceById(updateTopic.course());
             topicToUpdate.setCourse(courseUpdate);
@@ -71,6 +71,11 @@ public class TopicService {
 
         var topicSaved = topicRepository.save(topicToUpdate);
         return new TopicData(topicSaved);
+    }
+
+    public void delete(Long id) {
+        verifyExistsTopic(id);
+        topicRepository.deleteById(id);
     }
 
     private void verifyExistsTopic(Long id) {
