@@ -3,6 +3,7 @@ package br.com.forumhub.domain.topic.service;
 import br.com.forumhub.domain.exception.NotFoundException;
 import br.com.forumhub.domain.topic.dto.NewTopic;
 import br.com.forumhub.domain.topic.dto.TopicData;
+import br.com.forumhub.domain.topic.dto.TopicUpdate;
 import br.com.forumhub.domain.topic.model.Topic;
 import br.com.forumhub.domain.topic.repository.CourseRepository;
 import br.com.forumhub.domain.topic.repository.TopicRepository;
@@ -26,11 +27,8 @@ public class TopicService {
 
     public TopicData createNew(NewTopic newTopic) {
 
-        if (!authorRepository.existsById(newTopic.author()))
-            throw new NotFoundException("author not found with id = " + newTopic.author());
-
-        if (!courseRepository.existsById(newTopic.course()))
-            throw new NotFoundException("course not found with id = "+ newTopic.course());
+        verifyExistsAuthor(newTopic.author());
+        verifyExistsCourse(newTopic.course());
 
         if (topicRepository.countTopicsWith(newTopic.title(), newTopic.message()) != 0)
             throw new RuntimeException("topic exists");
@@ -46,11 +44,47 @@ public class TopicService {
 
     public TopicData findById(Long id) {
 
-        if (!topicRepository.existsById(id))
-            throw new NotFoundException("topic not found with id = " + id);
+        verifyExistsTopic(id);
 
         var topic = topicRepository.getReferenceById(id);
         return new TopicData(topic);
     }
 
+    public TopicData update(Long id, TopicUpdate updateTopic) {
+
+        verifyExistsTopic(id);
+
+        var topicToUpdate = topicRepository.getReferenceById(id);
+        topicToUpdate.update(updateTopic);
+
+        if (updateTopic.author() != null) {
+            verifyExistsAuthor(updateTopic.author());
+            var authorUpdate = authorRepository.getReferenceById(updateTopic.author());
+            topicToUpdate.setAuthor(authorUpdate);
+        }
+
+        if (updateTopic.course() != null){
+            verifyExistsCourse(updateTopic.course());
+            var courseUpdate = courseRepository.getReferenceById(updateTopic.course());
+            topicToUpdate.setCourse(courseUpdate);
+        }
+
+        var topicSaved = topicRepository.save(topicToUpdate);
+        return new TopicData(topicSaved);
+    }
+
+    private void verifyExistsTopic(Long id) {
+        if (!topicRepository.existsById(id))
+            throw new NotFoundException("topic not found with id = " + id);
+    }
+
+    private void verifyExistsAuthor(Long id) {
+        if (!authorRepository.existsById(id))
+            throw new NotFoundException("author not found with id = " + id);
+    }
+
+    private void verifyExistsCourse(Long id) {
+        if (!courseRepository.existsById(id))
+            throw new NotFoundException("course not found with id = " + id);
+    }
 }

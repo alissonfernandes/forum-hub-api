@@ -2,7 +2,7 @@ package br.com.forumhub.controller;
 
 import br.com.forumhub.domain.topic.dto.NewTopic;
 import br.com.forumhub.domain.topic.dto.TopicData;
-import br.com.forumhub.domain.topic.model.Topic;
+import br.com.forumhub.domain.topic.dto.TopicUpdate;
 import br.com.forumhub.domain.topic.repository.TopicRepository;
 import br.com.forumhub.domain.topic.service.TopicService;
 import jakarta.validation.Valid;
@@ -39,4 +39,11 @@ public class TopicController {
     public ResponseEntity get(@PathVariable Long id) {
         return ResponseEntity.ok(topicService.findById(id));
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity update(@PathVariable Long id, @RequestBody TopicUpdate update) {
+        return ResponseEntity.ok(topicService.update(id, update));
+    }
+
 }
