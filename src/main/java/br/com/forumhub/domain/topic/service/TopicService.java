@@ -1,5 +1,7 @@
 package br.com.forumhub.domain.topic.service;
 
+import br.com.forumhub.domain.exception.ExistingTopicException;
+import br.com.forumhub.domain.exception.NotExistsException;
 import br.com.forumhub.domain.exception.NotFoundException;
 import br.com.forumhub.domain.topic.dto.NewTopic;
 import br.com.forumhub.domain.topic.dto.TopicData;
@@ -31,7 +33,7 @@ public class TopicService {
         verifyExistsCourse(newTopic.course());
 
         if (topicRepository.countTopicsWith(newTopic.title(), newTopic.message()) != 0)
-            throw new RuntimeException("topic exists");
+            throw new ExistingTopicException("topic exists with title: '" + newTopic.title() + "' and message: '" + newTopic.message() + "'");//RuntimeException("topic exists");
 
         var author = authorRepository.getReferenceById(newTopic.author());
         var course = courseRepository.getReferenceById(newTopic.course());
@@ -85,11 +87,11 @@ public class TopicService {
 
     private void verifyExistsAuthor(Long id) {
         if (!authorRepository.existsById(id))
-            throw new NotFoundException("author not found with id = " + id);
+            throw new NotExistsException("not exists author with id = " + id);//NotFoundException("author not found with id = " + id);
     }
 
     private void verifyExistsCourse(Long id) {
         if (!courseRepository.existsById(id))
-            throw new NotFoundException("course not found with id = " + id);
+            throw new NotExistsException("not exists course with id = " + id); //NotFoundException("course not found with id = " + id);
     }
 }
