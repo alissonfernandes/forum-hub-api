@@ -16,8 +16,11 @@ public class TokenService {
 
     private static final String  ISSUER = "API topic";
 
-    @Value("${api.security.token.secret}")
+    @Value("${jwt.secret}")
     private String secret;
+
+    @Value("${jwt.expiration}")
+    private Integer expiration;
 
     public String generateToken(User user) {
         try {
@@ -34,6 +37,6 @@ public class TokenService {
     }
 
     private Instant getExpires() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(expiration).toInstant(ZoneOffset.of("-03:00"));
     }
 }
