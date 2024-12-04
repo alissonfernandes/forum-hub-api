@@ -2,6 +2,7 @@ package br.com.forumhub.domain.topic.model;
 
 import br.com.forumhub.domain.topic.dto.NewTopic;
 import br.com.forumhub.domain.topic.dto.TopicUpdate;
+import br.com.forumhub.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 

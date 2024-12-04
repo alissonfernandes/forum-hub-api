@@ -9,7 +9,7 @@ import br.com.forumhub.domain.topic.dto.TopicUpdate;
 import br.com.forumhub.domain.topic.model.Topic;
 import br.com.forumhub.domain.topic.repository.CourseRepository;
 import br.com.forumhub.domain.topic.repository.TopicRepository;
-import br.com.forumhub.domain.topic.repository.UserRepository;
+import br.com.forumhub.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,7 @@ package br.com.forumhub.domain.topic.repository;
 
 import br.com.forumhub.domain.topic.model.Course;
 import br.com.forumhub.domain.topic.model.Topic;
-import br.com.forumhub.domain.topic.model.User;
+import br.com.forumhub.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
