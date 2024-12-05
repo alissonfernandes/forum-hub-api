@@ -1,5 +1,6 @@
 package br.com.forumhub.infra.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,10 +12,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration // Classede seguranca a ser carregada pelo spring
 @EnableWebSecurity // Customiza configurações de seguranca
 public class SecurityConfigurations {
+
+    @Autowired
+    private SecurityFilter securityFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -25,6 +30,7 @@ public class SecurityConfigurations {
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll(); // Requisições publicas
                     req.anyRequest().authenticated(); // Requisiçõs protegidas
                 })
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) //Adiciona nosso filtro para ser executado antes do filtro do Spring
                 .build();
     }
 
