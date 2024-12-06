@@ -1,24 +1,24 @@
-# FórumHub
-O FórumHub é o ambiente onde replica o processo no nível back end no qual participantes de uma plataforma de cursos  podem tirar suas dúvidas sobre os cursos em que estão participando.
+# FÃ³rumHub
+O FÃ³rumHub Ã© o ambiente onde replica o processo no nÃ­vel back end no qual participantes de uma plataforma de cursos podem tirar suas dÃºvidas sobre assuntos dos cursos no qual estÃ£o participando.
 
 ![Badge em Desenvolviment](http://img.shields.io/static/v1?label=STATUS&message=Em%20Desenvolvimento&color=yellow&style=for-the-badge)
 ![Badge em Desenvolviment](http://img.shields.io/static/v1?label=&message=java&color=red&style=for-the-badge)
 ![Badge em Desenvolviment](http://img.shields.io/static/v1?label=&message=Spring&color=green&style=for-the-badge)
 ![Badge em Desenvolviment](http://img.shields.io/static/v1?label=&message=MySQL%208&color=blue&style=for-the-badge)
-## ? Funcionalidades
- * ``Criar novo tópico:`` permite o usuário publicar um novo tópico enviando um `body request`
- * ``Mostrar todos os tópicos criados:`` permite listar todos os tópicos já publicados de forma paginada 
- * ``Mostrar topico específico:`` permite detalhar um tópico em específico através de um ID específico
- * ``Atualizar tópico:`` permite atualizar um tópico por meio de um ID e um `body request`
- * ``Eliminar tópico:`` permite eliminar de forma física um tópico através de um ID específico
+## âœ¨ Funcionalidades
+ * ``Criar novo tÃ³pico:`` permite o usuÃ¡rio publicar um novo tÃ³pico enviando um `body request`
+ * ``Mostrar todos os tÃ³picos criados:`` permite listar todos os tÃ³picos jÃ¡ publicados de forma paginada 
+ * ``Mostrar topico especÃ­fico:`` permite detalhar um tÃ³pico em especÃ­fico atravÃ©s de um ID especÃ­fico
+ * ``Atualizar tÃ³pico:`` permite atualizar um tÃ³pico por meio de um ID e um `body request`
+ * ``Eliminar tÃ³pico:`` permite eliminar de forma fÃ­sica um tÃ³pico atravÃ©s de um ID especÃ­fico
 
-## ? Tecnologias utilizadas
+## ğŸš€ Tecnologias utilizadas
  * Java 21
  * JDK: Azul Zulu Community version 21.0.4
  * MySQL 8
- * Framework Spring 3.3.5
+ * Framework Spring 3.4.0
 
-## ? Dependências
+## ğŸ“‹ DependÃªncias
  * Lombok
  * Spring Web
  * Spring Boot DevTools
@@ -28,8 +28,8 @@ O FórumHub é o ambiente onde replica o processo no nível back end no qual partic
  * Validation
  * Spring Security
 
-## ?? Configuração
-Altere o arquivo de configuração do projeto `application.properties` de sua preferência:
+## âš™ï¸ ConfiguraÃ§Ã£o
+Altere o arquivo de configuraÃ§Ã£o do projeto `application.properties` de sua preferÃªncia:
 ```properties
 spring.application.name=forumhub
 spring.datasource.url=jdbc:mysql://localhost/alura_forumhub
