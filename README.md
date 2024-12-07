@@ -29,12 +29,12 @@ O FórumHub é o ambiente onde replica o processo no nível back end no qual par
  * Spring Security
 
 ## ⚙️ Configuração
-Altere o arquivo de configuração do projeto `application.properties` de sua preferência:
+Altere o arquivo de configuração do projeto `application.properties` de sua preferência para testes:
 ```properties
 spring.application.name=forumhub
-spring.datasource.url=jdbc:mysql://localhost/alura_forumhub
-spring.datasource.username=root
-spring.datasource.password=123456
+spring.datasource.url=jdbc:mysql://${HOST:localhost}/${DATABASE:alura_forumhub}
+spring.datasource.username=${USERNAME:root}
+spring.datasource.password=${PASSWORD:123456}
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 spring.jpa.show-sql=true
@@ -43,7 +43,46 @@ spring.jpa.properties.hibernate.format_sql=true
 jwt.secret=${JWT_SECRET:123456}
 jwt.expiration=2
 ```
+Ou crie variáveis de ambiente para não expor dados sensíveis de segurança da sua aplicação em produção
 
+|Variável de embiente| Descrição| Valor default
+|--- |--- |--- |
+|HOST|Endereço IP do banco de dados MySQL| localhost
+|DATABASE|Nome do banco de dados|alura_forumhub
+|USERNAME|Nome de usuário do banco de dados| root
+|PASSWORD|Senha do banco de dados|123456
+|JWT_SECRET|Senha para geração de token JWT|123456
+
+## 📁 Estrutura de pacotes
+A estrutura  de pacotes empregada neste projeto foi o **``Package by Feature``**(pacotes por funcionalidades). Esse tipo de estrutura sugere que você deve organizar seu código com base nos recursos individuais da aplicação que você implementa.
+```src/
+├── main/
+│   └── java/
+│       └── br/com/forumhub/        
+│             └── controller/
+│             └── domain/
+│                   └── topic
+│                   └── user
+│             └── infra/
+│                   └── security
+│                          └── authentication
+│                          └── token
+│                   └── exception
+├── test/
+│   └── java/
+│       └── br/com/forumhub/
+│                  └── 
+│  
+```` 
+## Documentação
+ * 📖 Swagger UI available at:/api/v1/swagger-ui/index.html
+ * 🔍 OpenAPI docs at:/api/v1/v3/api-docs
+
+### Features para ser implementadas
+ * Testes de integridade e unidade
+ * Endpoints que permita listar, adicionar, modificar, recuperar e delatar usuários
+ * Endpoints que permita listar, modificar, recuperar e deletar respostas
+ * Documentação Swagger
 
 
 
